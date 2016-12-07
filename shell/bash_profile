@@ -1,0 +1,36 @@
+
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+if [ -f `brew --prefix`/etc/bash_completion ]; then
+    . `brew --prefix`/etc/bash_completion
+fi
+
+# Git branch in prompt.
+
+parse_git_branch() {
+
+	    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+
+    }
+
+    export PS1="\u@\h \W\[\033[1;36m\]\$(parse_git_branch)\[\033[1;32m\] 🦀  🐳  "
+    export PATH=$PATH:~/bin
+
+# Elixer PATH
+
+export PATH="$PATH:/path/to/elixir/bin"
+
+[[ -s "/Users/kevinegstorf/.gvm/scripts/gvm" ]] && source "/Users/kevinegstorf/.gvm/scripts/gvm"
+
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda/lib64"
+export CUDA_HOME=/usr/local/cuda
+
+# added by Anaconda2 4.1.1 installer
+# export PATH="/Users/kevinegstorf/anaconda2/bin:$PATH"
+
+# 2016-09-26: Load the SSH keys into the keychain.
+ssh-add -A 2>/dev/null;
+
+# Node Path
+export PATH=$HOME/local/node/bin:$PATH
+export PATH="$HOME/.yarn/bin:$HOME/.npm-packages/bin:$PATH"
+source ~/.bashrc
